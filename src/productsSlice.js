@@ -8,8 +8,8 @@ export const HARDCODED_CATALOGUE = [
 ];
 
 
-export const productListSlice = createSlice({
-    name: "productList",
+export const productsSlice = createSlice({
+    name: "products",
     initialState: [
         {
             img: "forget_me_not.png",
@@ -17,7 +17,7 @@ export const productListSlice = createSlice({
             price: 20,
             quantity: 0,
             desc: "Tiny, delicate blue blossoms symbolizing enduring love, true loyalty, and everlasting memories between devoted hearts.",
-            month: "May"
+            cat: "May"
         },
         {
             img: "anniversary_rose.png",
@@ -25,7 +25,7 @@ export const productListSlice = createSlice({
             price: 17,
             quantity: 0,
             desc: "A classic, elegant bloom celebrating milestone love, timeless devotion, and deep, romantic commitment through the years.",
-            month: "May"
+            cat: "May"
         },
 
         {
@@ -34,7 +34,7 @@ export const productListSlice = createSlice({
             price: 15,
             quantity: 0,
             desc: "A striking, regal bloom symbolizing profound wisdom, deep hope, trust, and cherished messages of love.",
-            month: "June"
+            cat: "June"
           },
           {
             img: "bellflower.png",
@@ -42,7 +42,7 @@ export const productListSlice = createSlice({
             price: 30,
             quantity: 0,
             desc: "Charming, bell-shaped petals representing unwavering gratitude, lifelong constancy, humility, and gentle affection between close friends.",
-            month: "June"
+            cat: "June"
           },
 
           {
@@ -51,7 +51,7 @@ export const productListSlice = createSlice({
             price: 35,
             quantity: 0,
             desc: "Exotic, dramatic night-blooming petals representing hidden beauty, rare passion, and resilient, unexpected inner strength.",
-            month: "July"
+            cat: "July"
           },
           {
             img: "brid_of_paradise.png",
@@ -59,7 +59,7 @@ export const productListSlice = createSlice({
             price: 55,
             quantity: 0,
             desc: "A bold, tropical masterpiece symbolizing magnificent freedom, joyful optimism, ultimate success, and a sense of high adventure.",
-            month: "July"
+            cat: "July"
           },
 
 
@@ -85,5 +85,5 @@ export const productListSlice = createSlice({
     },
 });
 
-export const { incrementQuantity, decrementQuantity } = productListSlice.actions;
-export default productListSlice.reducer;
+export const { incrementQuantity, decrementQuantity } = productsSlice.actions;
+export default productsSlice.reducer;

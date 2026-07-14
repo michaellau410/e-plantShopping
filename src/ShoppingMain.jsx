@@ -4,14 +4,14 @@ import TotalCost from "./TotalCost";
 //import { toggleMealSelection } from "./mealsSlice";
 //import { incrementAvQuantity, decrementAvQuantity } from "./avSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { incrementQuantity, decrementQuantity } from "./productListSlice";
-import { HARDCODED_CATALOGUE } from "./productListSlice";
+import { incrementQuantity, decrementQuantity } from "./productsSlice";
+import { HARDCODED_CATALOGUE } from "./productsSlice";
 
 const ShoppingMain = () => {
 
     /* state.xxx where xxx is exported from store.js */
     /* everything about those flower groups */
-    const productListItems = useSelector((state) => state.productList);
+    const productListItems = useSelector((state) => state.products);
 
 
 
@@ -206,7 +206,7 @@ const ShoppingMain = () => {
                                         <div className="transparent-text-box">{cat.name} Flower Selection</div>
                            <div id="productList" className="flower_container container_main">
                                 <div className="flower_selection">
-                                    {productListItems.filter((item)=>item.month===cat.name).map((item, index) => (
+                                    {productListItems.filter((item)=>item.cat===cat.name).map((item, index) => (
                                         <div className="flower_main" key={item.name}>
                                             <div className="flower_name">{item.name}</div>
                                             <div className="img-container">
