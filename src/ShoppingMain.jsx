@@ -207,7 +207,7 @@ const ShoppingMain = () => {
                            <div id="productList" className="flower_container container_main">
                                 <div className="flower_selection">
                                     {productListItems.filter((item)=>item.month===cat.name).map((item, index) => (
-                                        <div className="flower_main" key={index}>
+                                        <div className="flower_main" key={item.name}>
                                             <div className="flower_name">{item.name}</div>
                                             <div className="img-container">
                                                 <img src={`${import.meta.env.BASE_URL}/images/${item.img}`} alt={item.name} />
@@ -216,8 +216,9 @@ const ShoppingMain = () => {
                                             <div className="flower_desc">{item.desc}</div>
                                             <div className="button_container">
                                                 <button
-                                                    className={productListItems[index].quantity === 0 ? " btn-available" : " btn-not-available btn-disabled"}
-                                                    onClick={() => handleAddToCartCart(index)}
+                                                    className={item.quantity >= 1 ?
+                                                         " btn-not-available btn-disabled": " btn-available" }
+                                                    onClick={() => handleAddToCartCart(item.name)}
                                                 >
                                                     Add to Cart
                                                 </button>

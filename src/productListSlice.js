@@ -48,7 +48,7 @@ export const productListSlice = createSlice({
           {
             img: "orchid_cactus.png",
             name: "Orchid Cactus",
-            cost: 35,
+            price: 35,
             quantity: 0,
             desc: "Exotic, dramatic night-blooming petals representing hidden beauty, rare passion, and resilient, unexpected inner strength.",
             month: "July"
@@ -56,7 +56,7 @@ export const productListSlice = createSlice({
           {
             img: "brid_of_paradise.png",
             name: "Bird of Paradise",
-            cost: 55,
+            price: 55,
             quantity: 0,
             desc: "A bold, tropical masterpiece symbolizing magnificent freedom, joyful optimism, ultimate success, and a sense of high adventure.",
             month: "July"
@@ -67,10 +67,14 @@ export const productListSlice = createSlice({
 
     reducers: {
         incrementQuantity: (state, action) => {
-            const item = state[action.payload];
+            const item = state.find(product=>product.name === action.payload);
             if (item) {
+                //console.log(item.name);
                 item.quantity++;
             }
+
+            //state.forEach((e)=>console.log(e.quantity));
+
         },
         decrementQuantity: (state, action) => {
             const item = state[action.payload];

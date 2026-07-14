@@ -143,8 +143,10 @@
     align-items: center;
     
     /* Typography */
-    color: #ffffff; 
-    font-size: 1.2rem;
+    color:#2b821e; 
+    font-size: 25px;
+    font-weight: 700;
+    font-family: 'Times New Roman', Times, serif !important;
   }
   
   .img-container {
