@@ -220,7 +220,7 @@ const ShoppingMain = () => {
                                                          " btn-not-available btn-disabled": " btn-available" }
                                                     onClick={() => handleAddToCartCart(item.name)}
                                                 >
-                                                    Add to Cart
+                                                    Add{item.quantity >= 1 ?"ed":""} to Cart
                                                 </button>
                                             </div>
                                         </div>
