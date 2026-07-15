@@ -90,9 +90,7 @@ export const CartSlice = createSlice({
 });
 
 
-export const readQuantity = (state) => {
-    return state.cart.items.reduce((sum, item) => sum + (item.quantity || 0), 0);
-  };
+export const readQuantity = (state) => state.cart.items.reduce((sum, item) => sum + (item.quantity || 0), 0);
 
 
 export const productItems = (state) => state.cart?.items || [];

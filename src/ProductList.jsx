@@ -11,7 +11,7 @@ import CartItem from "./CartItem";
 
 import { FiShoppingCart } from 'react-icons/fi';
 
-const ShoppingMain = () => {
+const ProductList = () => {
 
     /* state.xxx where xxx is exported from store.js */
     /* everything about those flower groups */
@@ -26,7 +26,7 @@ const ShoppingMain = () => {
 
     /* call reducer to take action */
     const handleAddToCart = (itemName) => {
-       dispatch(addToCart(itemName));
+        dispatch(addToCart(itemName));
     };
 
     //const noItemsInCart = (state) => state.noItemsInCart;
@@ -187,17 +187,17 @@ const ShoppingMain = () => {
 
                 </div>
 
-                <div className="navbar-right"> 
-      <button className="icon_button" onClick={() => setShowCart(!showCart)} aria-label="Show cart"> 
-        
+                <div className="navbar-right">
+                    <button className="icon_button" onClick={() => setShowCart(!showCart)} aria-label="Show cart">
 
-        <div className="cart_container">
-          <FiShoppingCart color="white" size="38px" />
-          <span className="cart_number">{noItemsInCart}</span>
-        </div>
 
-      </button> 
-    </div>
+                        <div className="cart_container">
+                            <FiShoppingCart color="white" size="38px" />
+                            <span className="cart_number">{noItemsInCart}</span>
+                        </div>
+
+                    </button>
+                </div>
             </nav>
 
 
@@ -206,53 +206,44 @@ const ShoppingMain = () => {
                     ?
                     (
 
-                        <div className="items-information"> 
+                        <div className="items-information">
                             {/* loop the catalogue */}
                             {/* then for each catalogue, loop and filter the product full list */}
                             {
                                 HARDCODED_CATALOGUE.map((cat) => (
                                     <>
                                         <div className="transparent-text-box">{cat.name} Flower Selection</div>
-                           <div id="productList" className="flower_container container_main">
-                                <div className="flower_selection">
-                                    {items.filter((item)=>item.cat===cat.name).map((item, index) => (
-                                        <div className="flower_main" key={item.name}>
-                                            <div className="flower_name">{item.name}</div>
-                                            <div className="img-container">
-                                                <img src={`${import.meta.env.BASE_URL}/images/${item.img}`} alt={item.name} />
-                                            </div>
-                                            <div className="flower_price">${item.price}</div>
-                                            <div className="flower_desc">{item.desc}</div>
-                                            <div className="button_container">
-                                                <button
-                                                    className={item.quantity >= 1 ?
-                                                         " btn-not-available btn-disabled": " btn-available" }
-                                                    onClick={() => handleAddToCart(item.name)}
-                                                >
-                                                    Add{item.quantity >= 1 ?"ed":""} to Cart
-                                                </button>
+                                        <div id="productList" className="flower_container container_main">
+                                            <div className="flower_selection">
+                                                {items.filter((item) => item.cat === cat.name).map((item, index) => (
+                                                    <div className="flower_main" key={item.name}>
+                                                        <div className="flower_name">{item.name}</div>
+                                                        <div className="img-container">
+                                                            <img src={`${import.meta.env.BASE_URL}/images/${item.img}`} alt={item.name} />
+                                                        </div>
+                                                        <div className="flower_price">${item.price}</div>
+                                                        <div className="flower_desc">{item.desc}</div>
+                                                        <div className="button_container">
+                                                            <button
+                                                                className={item.quantity >= 1 ?
+                                                                    " btn-not-available btn-disabled" : " btn-available"}
+                                                                onClick={() => handleAddToCart(item.name)}
+                                                            >
+                                                                Add{item.quantity >= 1 ? "ed" : ""} to Cart
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                ))}
                                             </div>
                                         </div>
-                                    ))}
-                                </div>
-                            </div>
                                     </>
                                 ))
                             }
 
-
-
-                            
-
-
-
-
-                           
-                            
                         </div>
                     ) : (
                         <div className="total_amount_detail">
-                            <CartItem totalCosts={totalCosts} ItemsDisplay={() => <ItemsDisplay items={items} />} />
+                           <CartItem />
                         </div>
                     )
                 }
@@ -263,4 +254,4 @@ const ShoppingMain = () => {
     );
 };
 
-export default ShoppingMain;
+export default ProductList;
