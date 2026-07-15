@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./ProductList.css";
-import { addToCart } from "./CartSlice";
+import { updateQuantity } from "./CartSlice";
 import { HARDCODED_CATALOGUE } from "./CartSlice";
 
 import { productItems, readQuantity } from "./CartSlice";
@@ -26,7 +26,7 @@ const ProductList = ({showProductList, setShowProductList}) => {
 
     /* call reducer to take action */
     const handleAddToCart = (itemName) => {
-        dispatch(addToCart(itemName));
+        dispatch(updateQuantity(itemName));
     };
 
     //const noItemsInCart = (state) => state.noItemsInCart;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import "./CartItem.css";
 
-import { incrementQuantity, decrementQuantity, removeFromCart } from "./CartSlice";
+import {  addItem, removeItem, updateQuantity } from "./CartSlice";
 import { productItems, readCartAmount } from "./CartSlice";
 
 
@@ -14,15 +14,15 @@ const CartItem = ({ showCart, setShowCart }) => {
     const totalAmount = useSelector(readCartAmount);
 
     const handleRemoveFromCart = (itemName) => {
-        dispatch(removeFromCart(itemName));
+        dispatch(updateQuantity(itemName));
     };
 
     const handleIncrementQuantity = (index) => {
-        dispatch(incrementQuantity(index));
+        dispatch(addItem(index));
     };
 
     const handleDecrementQuantity = (index) => {
-        dispatch(decrementQuantity(index));
+        dispatch(removeItem(index));
     };
 
     return (
