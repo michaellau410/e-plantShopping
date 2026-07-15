@@ -1,0 +1,121 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+}
+
+/* Main Container */
+.cart-item {
+    display: flex;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    max-width: 450px;
+    width: 100%;
+    gap: 20px;
+}
+
+/* Product Image */
+.product-img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+}
+
+/* Content Area */
+.product-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 4px;
+}
+
+.product-price {
+    font-size: 14px;
+    color: #555555;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* Quantity Selector Controls */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.btn-qty {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #e0e0e0;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555555;
+}
+
+.btn-qty:hover {
+    background-color: #eeeeee;
+}
+
+.btn-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.button_container {
+    margin-top: 15px;
+    gap: 20px;
+}
+
+
+.qty-value {
+    font-size: 14px;
+    font-weight: bold;
+    width: 20px;
+    text-align: center;
+}
+
+/* Total Price Display */
+.total-price {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 12px;
+}
+
+/* Delete Button */
+.btn-delete {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    width: max-content;
+}
+
+.btn-delete:hover {
+    background-color: #fa5252;
+}

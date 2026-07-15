@@ -8,9 +8,10 @@ export const HARDCODED_CATALOGUE = [
 ];
 
 
-export const productsSlice = createSlice({
+export const CartSlice = createSlice({
     name: "products",
-    initialState: [
+    initialState: {
+    items: [
         {
             img: "forget_me_not.png",
             name: "Forget Me Not",
@@ -64,26 +65,45 @@ export const productsSlice = createSlice({
 
 
     ],
-
+},
     reducers: {
-        incrementQuantity: (state, action) => {
-            const item = state.find(product=>product.name === action.payload);
+        addToCart: (state, action) => {
+            const item = state.items.find(item=>item.name === action.payload);
+            if (item && item.quantity===0) {
+                item.quantity = 1;
+                
+            }
+        },
+
+        removeFromCart: (state, action) => {
+            const item = state.items.find(item=>item.name === action.payload);
             if (item) {
-                //console.log(item.name);
+                item.quantity = 0;
+            }
+        },
+
+        incrementQuantity: (state, action) => {
+            const item = state.items.find(item=>item.name === action.payload);
+            if (item) {
                 item.quantity++;
             }
-
-            //state.forEach((e)=>console.log(e.quantity));
-
         },
+
         decrementQuantity: (state, action) => {
-            const item = state[action.payload];
-            if (item && item.quantity > 0) {
+            const item = state.items.find(item=>item.name === action.payload);
+            if (item && item.quantity > 1) {
                 item.quantity--;
             }
         },
     },
 });
 
-export const { incrementQuantity, decrementQuantity } = productsSlice.actions;
-export default productsSlice.reducer;
+
+export const readQuantity = (state) => state.cart.items.reduce((sum, item) => sum + (item.quantity || 0), 0);
+
+export const readCartAmount = (state) => state.cart.items.reduce((sum, item) => sum + ((item.quantity * item.price) || 0), 0);
+
+
+export const productItems = (state) => state.cart?.items || [];
+export const { incrementQuantity, decrementQuantity, addToCart, removeFromCart} = CartSlice.actions;
+export default CartSlice.reducer;
