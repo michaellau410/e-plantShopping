@@ -8,9 +8,10 @@ export const HARDCODED_CATALOGUE = [
 ];
 
 
-export const productsSlice = createSlice({
+export const CartSlice = createSlice({
     name: "products",
-    initialState: [
+    initialState: {
+    items: [
         {
             img: "forget_me_not.png",
             name: "Forget Me Not",
@@ -64,26 +65,33 @@ export const productsSlice = createSlice({
 
 
     ],
-
+},
     reducers: {
         incrementQuantity: (state, action) => {
-            const item = state.find(product=>product.name === action.payload);
+
+            const item = state.items.find(item=>item.name === action.payload);
             if (item) {
-                //console.log(item.name);
+
                 item.quantity++;
             }
-
-            //state.forEach((e)=>console.log(e.quantity));
-
         },
         decrementQuantity: (state, action) => {
-            const item = state[action.payload];
-            if (item && item.quantity > 0) {
-                item.quantity--;
-            }
+
         },
     },
 });
 
-export const { incrementQuantity, decrementQuantity } = productsSlice.actions;
-export default productsSlice.reducer;
+
+
+
+
+export const productItems = (state) => state.cart?.items || [];
+
+export const noOfItemInCard = (state) => {
+    const items = productItems(state);
+    return items.reduce((sum, item) => sum + (item.qty || 0), 0);
+  };
+
+
+export const { incrementQuantity, decrementQuantity } = CartSlice.actions;
+export default CartSlice.reducer;

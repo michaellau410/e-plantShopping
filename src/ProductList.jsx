@@ -1,33 +1,32 @@
 import React, { useState } from "react";
-import "./ShoppingMain.css";
-import TotalCost from "./TotalCost";
-//import { toggleMealSelection } from "./mealsSlice";
-//import { incrementAvQuantity, decrementAvQuantity } from "./avSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { incrementQuantity, decrementQuantity } from "./productsSlice";
-import { HARDCODED_CATALOGUE } from "./productsSlice";
+
+import "./ProductList.css";
+import { incrementQuantity, decrementQuantity } from "./CartSlice";
+import { HARDCODED_CATALOGUE } from "./CartSlice";
+
+import { productItems, noOfItemInCard } from "./CartSlice";
+
+import CartItem from "./CartItem";
+
+import { FaShoppingCart } from 'react-icons/fa';
 
 const ShoppingMain = () => {
 
     /* state.xxx where xxx is exported from store.js */
     /* everything about those flower groups */
-    const productListItems = useSelector((state) => state.products);
+    const items = useSelector(productItems);
+    const noItemsInCart = useSelector(noOfItemInCard);
 
-
-
-    /* this is for going to shopping cart page*/
+    /* this is for decising show prodict list or shop cart */
     const [showCart, setShowCart] = useState(false);
 
-
-    const [numberOfPeople, setNumberOfPeople] = useState(1);
-
-
-
+    /* for sending out updated data */
     const dispatch = useDispatch();
 
-    /* update the flower state, set 0 to 1  */
-    const handleAddToCartCart = (index) => {
-       dispatch(incrementQuantity(index));
+    /* call reducer to take action */
+    const handleAddToCartCart = (itemName) => {
+       dispatch(incrementQuantity(itemName));
     };
 
     //const remainingAuditoriumQuantity = 3 - venueItems.find(item => item.name === "Auditorium Hall (Capacity:200)").quantity;
@@ -186,11 +185,17 @@ const ShoppingMain = () => {
 
                 </div>
 
-                <div class="navbar-right">
-                    <button className="details_button" onClick={() => setShowCart(!showCart)}>
-                        Show Cart
-                    </button>
-                </div>
+                <div className="navbar-right"> 
+      <button className="icon_button" onClick={() => setShowCart(!showCart)} aria-label="Show cart"> 
+        
+
+        <div className="cart_container">
+          <FaShoppingCart color="white" size="35px" />
+          <span className="cart_number">{noItemsInCart}</span>
+        </div>
+
+      </button> 
+    </div>
             </nav>
 
 
@@ -200,13 +205,15 @@ const ShoppingMain = () => {
                     (
 
                         <div className="items-information"> 
+                            {/* loop the catalogue */}
+                            {/* then for each catalogue, loop and filter the product full list */}
                             {
                                 HARDCODED_CATALOGUE.map((cat) => (
                                     <>
                                         <div className="transparent-text-box">{cat.name} Flower Selection</div>
                            <div id="productList" className="flower_container container_main">
                                 <div className="flower_selection">
-                                    {productListItems.filter((item)=>item.cat===cat.name).map((item, index) => (
+                                    {items.filter((item)=>item.cat===cat.name).map((item, index) => (
                                         <div className="flower_main" key={item.name}>
                                             <div className="flower_name">{item.name}</div>
                                             <div className="img-container">
@@ -238,75 +245,12 @@ const ShoppingMain = () => {
 
 
 
-                            {/*Necessary Add-ons*/}
-                            {/*
-                            <div id="addons" className="venue_container container_main">
-
-                                <div className="text">
-
-                                    <h1> Add-ons Selection</h1>
-
-                                </div>
-                                <div className="addons_selection">
-                                    {avItems.map((item, index) => (
-                                        <div className="av_data venue_main" key={index}>
-                                            <div className="img">
-                                                <img src={item.img} alt={item.name} />
-                                            </div>
-                                            <div className="text"> {item.name} </div>
-                                            <div> ${item.cost} </div>
-                                            <div className="addons_btn">
-                                                <button className="btn-warning" onClick={() => handleDecrementAvQuantity(index)}> &ndash; </button>
-                                                <span className="quantity-value">{item.quantity}</span>
-                                                <button className=" btn-success" onClick={() => handleIncrementAvQuantity(index)}> &#43; </button>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="total_cost">Total Cost: {avTotalCost}</div>
-                            </div>
-                            */}
-
-                            {/* Meal Section */}
-                            {/*            
-                            <div id="meals" className="venue_container container_main">
-
-                                <div className="text">
-
-                                    <h1>Meals Selection</h1>
-                                </div>
-
-                                <div className="input-container venue_selection">
-                                    <div className="input-container venue_selection">
-                                        <label htmlFor="numberOfPeople"><h3>Number of People:</h3></label>
-                                        <input type="number" className="input_box5" id="numberOfPeople" value={numberOfPeople}
-                                            onChange={(e) => setNumberOfPeople(parseInt(e.target.value))}
-                                            min="1"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="meal_selection">
-                                    {mealsItems.map((item, index) => (
-                                        <div className="meal_item" key={index} style={{ padding: 15 }}>
-                                            <div className="inner">
-                                                <input type="checkbox" id={`meal_${index}`}
-                                                    checked={item.selected}
-                                                    onChange={() => handleMealSelection(index)}
-                                                />
-                                                <label htmlFor={`meal_${index}`}> {item.name} </label>
-                                            </div>
-                                            <div className="meal_cost">${item.cost}</div>
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="total_cost">Total Cost: {mealsTotalCost}</div>
-
-                            </div>
-                            */}
+                           
+                            
                         </div>
                     ) : (
                         <div className="total_amount_detail">
-                            <TotalCost totalCosts={totalCosts} ItemsDisplay={() => <ItemsDisplay items={items} />} />
+                            <CartItem totalCosts={totalCosts} ItemsDisplay={() => <ItemsDisplay items={items} />} />
                         </div>
                     )
                 }

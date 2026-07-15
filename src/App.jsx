@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import ShoppingMain from "./ShoppingMain";
+import ProductList from "./ProductList";
 import AboutUs from "./AboutUs";
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
             </header>
 
             <div className={`event-list-container ${showMain ? 'visible' : ''}`}>
-                <ShoppingMain />
+                <ProductList />
             </div>
         </>
     );
